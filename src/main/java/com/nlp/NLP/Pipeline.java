@@ -5,18 +5,19 @@ import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import java.util.Properties;
 
 public class Pipeline {
-    private static Properties properties;
-    private static String propertiesName = "";
+    private static final Properties properties;
+    private static final String propertiesName = "tokenize,ssplit,pos,lemma,ner,parse,sentiment";
     private static StanfordCoreNLP stanfordCoreNLP;
-
-    private Pipeline() {}
 
     static {
         properties = new Properties();
-        properties.setProperty("annotators",propertiesName);
+        properties.setProperty("annotators", propertiesName);
     }
 
-    private static StanfordCoreNLP getStanfordCoreNLP() {
+    private Pipeline() {
+    }
+
+    public static StanfordCoreNLP getPipeline() {
         if (stanfordCoreNLP == null) {
             stanfordCoreNLP = new StanfordCoreNLP(properties);
         }
